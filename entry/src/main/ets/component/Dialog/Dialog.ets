@@ -1,11 +1,12 @@
 @CustomDialog
-export default  struct Dialog{
-  @Prop message:string
+export default struct Dialog {
+  @Prop message: string
   controller: CustomDialogController
   cancel: () => void
   confirm: () => void
-  build(){
-    Column(){
+
+  build() {
+    Column() {
       Text(this.message)
         .fontSize(20)
         .margin({ top: 10, bottom: 10 })
