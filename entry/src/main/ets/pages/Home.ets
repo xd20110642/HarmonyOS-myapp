@@ -12,50 +12,30 @@ struct Home {
       .slide(SlideEffect.Left)
   }
   @State navList:Array<NavObj>=[
-    { text:'123', number:0 },
-    { text:'456', number:1 },
-    { text:'789', number:2 },
+    { text:'首页', number:0 },
+    { text:'个人中心', number:1 },
+    { text:'发现', number:2 },
   ]
   @State currentIndex:number=0;
   @Builder renderNav(){
-    Flex(){
+    Tabs({barPosition:BarPosition.End}){
       ForEach(this.navList,item => {
-        Row(){
+        // 在TabContent定义路由
+        TabContent(){
           Text(item.text)
-            .fontColor(this.currentIndex == item.number ? '#007DFF' : '#182431')
-            .fontSize(10)
-            .lineHeight(14)
-            .fontWeight(500)
-            .margin({ top: 3 })
+            .fontSize(30)
+            .width('100%')
+            .height('100%')
         }
-        .justifyContent(FlexAlign.Center)
-        .alignItems(VerticalAlign.Center)
-        .backgroundColor('#ccc')
-        .flexBasis('auto')
-        .height(56)
-        .width('33.3%')
-        .onClick(() => {
-          this.currentIndex=item.number;
-        })
-
+        .tabBar(item.text)
       })
     }
     .width('100%')
+    // .height('100%')
   }
   build(){
     Column(){
-      Navigation(){
-        Text('567')
-        NavRouter(){
-          Text('我是NavRouter')
-          NavDestination(){
-            Text('今天共有七节课').fontSize(30)
-          }
-        }
-      }
-      .toolBar(this.renderNav)
-      .hideToolBar(false)
-      .hideTitleBar(true)
+      this.renderNav()
     }
     .height('100%')
     .border({width:1})
